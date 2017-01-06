@@ -18,8 +18,6 @@ namespace LocalCacher
 		public int CacheResourceFiles { get; set; } = 2;
 		public int CacheSoundFiles { get; set; } = 2;
 		public int CheckFiles { get; set; } = 1;
-		public bool SaveApiStart2 { get; set; } = true;
-		public bool UseCacheJs { get; set; } = false;
 
 		public bool ShowCacheLog { get; set; } = true;
 		public bool ShowMainD2Link { get; set; } = false;

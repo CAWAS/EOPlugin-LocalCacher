@@ -49,6 +49,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -62,7 +63,9 @@
     <Compile Include="Cache\Extensions.cs" />
     <Compile Include="Cache\TaskRecord.cs" />
     <Compile Include="GMTHelper.cs" />
+    <Compile Include="iniFiles.cs" />
     <Compile Include="LocalCacher.cs" />
+    <Compile Include="ModifyConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="SettingsForm.cs">

@@ -58,6 +58,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cache\CacheCore.cs" />
+    <Compile Include="Cache\Extensions.cs" />
+    <Compile Include="Cache\TaskRecord.cs" />
+    <Compile Include="GMTHelper.cs" />
     <Compile Include="LocalCacher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />

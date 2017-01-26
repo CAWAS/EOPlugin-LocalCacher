@@ -274,7 +274,13 @@ namespace LocalCacher
 					}
 					oSession.oResponse.headers["Accept-Ranges"] = "bytes";
 
-					oSession.ResponseBody = File.ReadAllBytes(filepath);
+					byte[] file;
+					using (var fs = File.Open(filepath, FileMode.Open, FileAccess.Read, FileShare.Read))
+					{
+					    file = new byte[fs.Length];
+					    fs.Read(file, 0, (int)fs.Length);
+					}
+					oSession.ResponseBody = file;
 
 					//Debug.WriteLine("CACHR> 【返回本地】" + result);
 
@@ -318,7 +324,13 @@ namespace LocalCacher
 					{
 
 						//服务器返回304，文件没有修改 -> 返回本地文件
-						oSession.ResponseBody = File.ReadAllBytes(filepath);
+						byte[] file;
+						using (var fs = File.Open(filepath, FileMode.Open, FileAccess.Read, FileShare.Read))
+						{
+						    file = new byte[fs.Length];
+						    fs.Read(file, 0, (int)fs.Length);
+						}
+						oSession.ResponseBody = file;
 						oSession.oResponse.headers.HTTPResponseCode = 200;
 						oSession.oResponse.headers.HTTPResponseStatus = "200 OK";
 						oSession.oResponse.headers["Last-Modified"] = oSession.oRequest.headers["If-Modified-Since"];

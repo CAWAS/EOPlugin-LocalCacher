@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -34,6 +35,8 @@ namespace LocalCacher
 			Cache = new CacheCore(settings);
 		    ModifyConfiguration.Instance.LoadSettings();
 	    }
+
+	    private ConcurrentBag<string> CheckedFiles = new ConcurrentBag<string>();
 
 	    private void MakaiOnBeforeResponse(Session oSession)
 	    {
@@ -322,6 +325,7 @@ namespace LocalCacher
 					//只有TaskRecord中有记录的文件才是验证的文件，才需要修改Header
 					if (!string.IsNullOrEmpty(filepath))
 					{
+						CheckedFiles.Add(filepath);
 
 						//服务器返回304，文件没有修改 -> 返回本地文件
 						byte[] file;
@@ -367,7 +371,7 @@ namespace LocalCacher
 			{
 
 				string filepath = TaskRecord.GetAndRemove(oSession.fullUrl);
-				if (!string.IsNullOrEmpty(filepath))
+				if (!(string.IsNullOrEmpty(filepath) || CheckedFiles.Contains(filepath)))
 				{
 					if (File.Exists(filepath))
 						File.Delete(filepath);
